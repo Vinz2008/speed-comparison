@@ -391,10 +391,10 @@ swift:
 
 zig:
   # On 3.16 there is no zig package, but on edge there is
-  FROM alpine:edge
+  FROM alpine:3.20
   # https://pkgs.alpinelinux.org/package/edge/testing/aarch64/zig
   # https://stackoverflow.com/a/62218241
-  RUN apk add --no-cache hyperfine zig --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+  RUN apk add --no-cache hyperfine zig
   DO +ADD_FILES --src="leibniz.zig"
   RUN --no-cache zig build-exe -OReleaseFast leibniz.zig
   DO +BENCH --name="zig" --lang="Zig" --version="zig version" --cmd="./leibniz"
